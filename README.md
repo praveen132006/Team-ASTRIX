@@ -1,4 +1,4 @@
-# AI Forensic Analysis System
+# AI Forensic Analysis System by Team ASTRIX
 
 A powerful tool for detecting AI-generated content using multiple forensic analysis techniques.
 
@@ -6,7 +6,7 @@ A powerful tool for detecting AI-generated content using multiple forensic analy
 
 ## Overview
 
-The AI Forensic Analysis System is designed to differentiate between authentic (human-created) media and AI-generated or manipulated content. It employs multiple forensic analysis techniques to detect indicators of AI generation, manipulation, or deepfakes in images, videos, and text.
+The AI Forensic Analysis System is designed to differentiate between authentic (human-created) media and AI-generated or manipulated content. It employs multiple forensic analysis techniques to detect indicators of AI generation, manipulation, or deepfakes in images.
 
 With the rapid advancement of AI image generation technologies like DALL-E, Midjourney, and Stable Diffusion, the ability to detect AI-generated images has become increasingly important. This system provides comprehensive analysis and visualization tools to identify AI artifacts and manipulation markers.
 
@@ -14,57 +14,75 @@ With the rapid advancement of AI image generation technologies like DALL-E, Midj
 
 ### Image Analysis
 
-- **Error Level Analysis (ELA)**: Detects inconsistent compression artifacts that typically appear in manipulated areas.
+- **Pattern & Frequency Analysis**: Reveals artifacts invisible to the human eye but detectable in the frequency domain, especially effective for DALL-E images.
 - **Noise Analysis**: Identifies unnatural noise patterns characteristic of AI-generated images.
-- **Frequency Domain Analysis**: Reveals artifacts invisible to the human eye but detectable in the frequency domain.
-- **Facial Analysis**: Detects inconsistencies in facial features, textures, and geometry that often appear in AI-generated faces.
-- **Metadata Verification**: Examines image metadata for inconsistencies or missing information typical of AI-generated images.
-- **CNN Classification**: Uses a deep learning model trained specifically to detect AI-generated imagery.
+- **Facial Feature Analysis**: Detects inconsistencies in facial features, eyes, proportions, and textures that reveal AI-generated faces.
+- **Pixel Quantization Detection**: Analyzes pixel value distributions to find quantization artifacts common in AI-generated images.
+- **Aspect Ratio Analysis**: Examines image dimensions for standard ratios used by AI generators.
+- **Symmetry Detection**: Identifies unnatural symmetry that appears in AI-generated content.
 
-### Text Analysis
-
-- **Pattern Matching**: Detects common linguistic patterns used by AI text generators.
-- **Complexity Analysis**: Analyzes text complexity and structure.
-- **Repetition Detection**: Identifies unnatural repetition patterns.
-- **Filler Word Analysis**: Detects overuse of filler words common in AI-generated text.
-
-## Core Components
-
-1. **DeepfakeDetector**: Main module for analyzing images and videos.
-2. **ELAAnalyzer**: Specialized module for Error Level Analysis.
-3. **NoiseAnalyzer**: Analyzes noise patterns and distribution.
-4. **CNNClassifier**: Deep learning-based AI image detection.
-5. **MetadataAnalyzer**: Extracts and analyzes metadata from files.
-6. **TextAnalyzer**: Specialized module for detecting AI-generated text.
-
-## Technical Architecture
-
-The system is built with a modular architecture, allowing for easy extension and improvement:
-
-- **Backend**: Flask-based Python application handling analysis requests
-- **Analysis Modules**: Specialized Python modules for different forensic techniques
-- **Web Interface**: Modern Bootstrap-based UI for easy interaction
-- **Visualization**: Interactive visualizations of analysis results
-
-## Getting Started
+## Installation Instructions
 
 ### Prerequisites
 
-- Python 3.8+
-- pip
+- Python 3.8+ 
+- pip (Python package manager)
+- Git
 
-### Installation
+### Option 1: Quick Setup (Recommended)
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/forensic-ai.git
-   cd forensic-ai
+   git clone https://github.com/praveen132006/Team-ASTRIX.git
+   cd Team-ASTRIX
    ```
 
-2. Create a virtual environment (optional but recommended):
+2. Run the setup script which will create a virtual environment and install dependencies:
+   
+   **On Windows:**
+   ```
+   python run.py --setup
+   ```
+   
+   **On macOS/Linux:**
+   ```
+   python3 run.py --setup
+   ```
+
+3. Run the application:
+   
+   **On Windows:**
+   ```
+   python run.py
+   ```
+   
+   **On macOS/Linux:**
+   ```
+   python3 run.py
+   ```
+
+4. Access the web interface at: http://localhost:5000
+
+### Option 2: Manual Setup
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/praveen132006/Team-ASTRIX.git
+   cd Team-ASTRIX
+   ```
+
+2. Create a virtual environment:
+   
+   **On Windows:**
    ```
    python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   venv\Scripts\activate
+   ```
+   
+   **On macOS/Linux:**
+   ```
+   python3 -m venv venv
+   source venv/bin/activate
    ```
 
 3. Install dependencies:
@@ -74,76 +92,45 @@ The system is built with a modular architecture, allowing for easy extension and
 
 4. Run the application:
    ```
-   python app.py
+   python simple_app.py
    ```
 
 5. Access the web interface at: http://localhost:5000
 
+### Option 3: Running the Simple Version
+
+If you encounter issues with dependencies or just want to test the application quickly:
+
+1. After cloning the repository and activating the virtual environment:
+   ```
+   python simple_app.py
+   ```
+
+2. This will run the streamlined version of the application with core AI detection features.
+
 ## Usage
 
-### Web Interface
+1. Open the application in your browser at http://localhost:5000
+2. Upload an image you want to analyze (supports JPG, PNG, GIF, WEBP)
+3. The system will analyze the image and provide:
+   - AI generation probability score
+   - Classification (AI-generated or authentic)
+   - Detailed scores for various detection metrics
+   - Visualizations of detected patterns
+   - Analysis notes explaining the findings
 
-1. Open the application in your browser.
-2. Choose the type of content to analyze (image, video, or text).
-3. Upload or paste your content.
-4. Click "Analyze" and wait for the results.
-5. Review the comprehensive analysis, including:
-   - Manipulation probability score
-   - Forensic markers detected
-   - Visualizations of suspicious areas
-   - Detailed recommendations
+## Project Information
 
-### API Usage
+Developed by Team ASTRIX for the Code Craft Chase Hackathon:
 
-The system also provides a RESTful API for programmatic access:
+- Sanjeev Ram S - RA2411042010062
+- Vishal Adhityaa S K - RA2411042010057
+- Praveen M - RA2411042010026
 
-```python
-import requests
+## Repository
 
-# Analyze an image
-response = requests.post(
-    "http://localhost:5000/analyze/image",
-    files={"file": open("image.jpg", "rb")}
-)
-
-# Analyze text
-response = requests.post(
-    "http://localhost:5000/analyze/text",
-    json={"text": "Text to analyze for AI generation"}
-)
-
-result = response.json()
-print(f"AI Generation Probability: {result['manipulation_probability']}")
-```
-
-## Development
-
-### Adding New Analysis Techniques
-
-1. Create a new analyzer module in the `modules/` directory.
-2. Implement the required analysis methods.
-3. Integrate the new analyzer into the main `DeepfakeDetector` class.
-4. Update the UI to display the new analysis results.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+GitHub: [https://github.com/praveen132006/Team-ASTRIX](https://github.com/praveen132006/Team-ASTRIX)
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgements
-
-- OpenCV for computer vision functionality
-- TensorFlow for deep learning capabilities
-- Flask for the web framework
-- Bootstrap for UI components
-- Chart.js for visualization
-- Various research papers on digital image forensics and deepfake detection 
+This project is licensed under the MIT License - see the LICENSE file for details. 
