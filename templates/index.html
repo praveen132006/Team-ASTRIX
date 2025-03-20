@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Forensic Analysis System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="hero-section">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <div class="logo-wrapper">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <span>ForensicAI by <span style="color: #4a90e2; font-weight: 700; text-shadow: 0px 1px 2px rgba(0,0,0,0.1);">Team ASTRIX</span></span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Documentation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="https://github.com/praveen132006/Team-ASTRIX" target="_blank">
+                                <i class="fab fa-github me-2"></i>GitHub
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="team-info text-center mb-3" style="background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(240,248,255,0.85)); padding: 15px; border-radius: 10px; margin-top: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h5 class="mb-2" style="color: #2c3e50; font-weight: 600;">Code Craft Chase – Hackathon by <span style="color: #3498db;">Team ASTRIX</span></h5>
+                <div class="d-flex justify-content-center" style="flex-wrap: wrap;">
+                    <div class="mx-3 my-1"><i class="fas fa-user-astronaut text-primary me-1"></i> <strong>Sanjeev Ram S</strong> <span class="badge bg-light text-dark">RA2411042010062</span></div>
+                    <div class="mx-3 my-1"><i class="fas fa-user-shield text-primary me-1"></i> <strong>Vishal Adhityaa S K</strong> <span class="badge bg-light text-dark">RA2411042010057</span></div>
+                    <div class="mx-3 my-1"><i class="fas fa-user-ninja text-primary me-1"></i> <strong>Praveen M</strong> <span class="badge bg-light text-dark">RA2411042010026</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-title">Detect <span class="highlight">AI-Generated</span> Images With Forensic Precision</h1>
+                    <p class="hero-subtitle">
+                        Our advanced algorithms analyze images to identify AI-generated content, including DALL-E, Midjourney, and other AI image generators.
+                    </p>
+                    <div class="hero-badges">
+                        <span class="badge">
+                            <i class="fas fa-face-viewfinder"></i> Facial Analysis
+                        </span>
+                        <span class="badge">
+                            <i class="fas fa-wave-square"></i> Pattern Detection
+                        </span>
+                        <span class="badge">
+                            <i class="fas fa-square-check"></i> DALL-E Detection
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1633412802994-5c058f151b66?q=80&w=2070" alt="AI Analysis" class="img-fluid">
+                        <div class="hero-image-overlay"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#ffffff" fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,208C384,192,480,192,576,208C672,224,768,256,864,261.3C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="analytics-selection">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="section-header text-center">
+                            <h2>Upload an Image for AI Detection Analysis</h2>
+                            <p>Our system will analyze the image to determine if it was created by an AI generator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-tabs">
+                <div class="tab-content active" id="media-tab">
+                    <div class="card analysis-card">
+                        <div class="card-body">
+                            <form id="mediaForm" enctype="multipart/form-data">
+                                <div class="upload-area" id="uploadArea">
+                                    <input type="file" class="file-input" id="mediaFile" name="file" accept="image/*">
+                                    <div class="upload-content">
+                                        <div class="upload-icon">
+                                            <i class="fas fa-cloud-arrow-up"></i>
+                                        </div>
+                                        <h3>Drop your image here</h3>
+                                        <p>or <span class="upload-browse">browse</span> to choose a file</p>
+                                        <div class="upload-info">
+                                            <p>Supports: JPG, PNG, GIF, WEBP</p>
+                                            <p>Max size: 16MB</p>
+                                        </div>
+                                    </div>
+                                    <div class="file-preview" style="display: none;">
+                                        <div class="file-preview-content">
+                                            <div class="file-image">
+                                                <img id="filePreviewImg" src="" alt="Preview">
+                                                <div class="file-overlay">
+                                                    <i class="fas fa-file-image"></i>
+                                                </div>
+                                            </div>
+                                            <div class="file-details">
+                                                <h4 id="fileName">filename.jpg</h4>
+                                                <p id="fileSize">2.3 MB</p>
+                                                <button type="button" class="btn btn-sm btn-outline-danger" id="removeFile">
+                                                    <i class="fas fa-times"></i> Remove
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="analysis-actions">
+                                    <button type="submit" id="analyzeMediaBtn" class="btn btn-primary btn-lg" disabled>
+                                        <i class="fas fa-magnifying-glass-chart me-2"></i>Analyze Image
+                                    </button>
+                                </div>
+                            </form>
+                            <div id="mediaResults" class="analysis-results"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="features-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Advanced AI Image Detection Features</h2>
+                <p>Our system uses multiple detection techniques to identify AI-generated images</p>
+            </div>
+            <div class="row features">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-face-viewfinder"></i>
+                        </div>
+                        <h3>Facial Feature Analysis</h3>
+                        <p>Detects inconsistencies in facial features, eyes, proportions, and textures that reveal AI-generated faces and deepfakes.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-wave-square"></i>
+                        </div>
+                        <h3>Pattern & Frequency Analysis</h3>
+                        <p>Identifies AI artifacts in the frequency domain and repetitive patterns that are characteristic of DALL-E and other AI generators.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h3>Quantization Detection</h3>
+                        <p>Analyzes pixel value distributions and noise patterns to detect the unique signatures of AI image generators.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detailed Analysis Results</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalContent">
+                    <!-- Content will be dynamically populated -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="downloadReport">
+                        <i class="fas fa-download me-2"></i>Download Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Spinner Overlay -->
+    <div class="spinner-overlay" style="display: none;">
+        <div class="spinner-content">
+            <div class="spinner"></div>
+            <p>Analyzing content...</p>
+            <p class="spinner-caption">This may take a few seconds</p>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="footer-brand mb-4">
+                        <i class="fas fa-shield-halved"></i>
+                        <span>ForensicAI</span>
+                    </div>
+                    <p class="mb-3">
+                        Advanced AI detection system for analyzing and identifying AI-generated images
+                    </p>
+                    <div class="mb-4">
+                        <a href="https://github.com/praveen132006/Team-ASTRIX" target="_blank" class="btn btn-outline-primary rounded-pill">
+                            <i class="fab fa-github me-2"></i>Star us on GitHub
+                        </a>
+                    </div>
+                    <div class="team-signature" style="font-size: 0.9rem; opacity: 0.9;">
+                        <span class="badge bg-primary me-1"><i class="fas fa-rocket"></i> Team ASTRIX</span>
+                        Innovating the future of AI forensics
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom mt-4">
+                <p>&copy; 2025 ForensicAI by Team ASTRIX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script>
+        // Improved error handling for image analysis
+        document.getElementById('mediaForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const file = document.getElementById('mediaFile').files[0];
+            
+            if (!file) {
+                alert('Please select an image to analyze.');
+                return;
+            }
+            
+            // Show loading spinner
+            document.querySelector('.spinner-overlay').style.display = 'flex';
+            
+            // Only use the image endpoint
+            let endpoint = '/analyze/image';
+            
+            fetch(endpoint, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => {
+                        throw new Error(err.error || 'An error occurred during analysis');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.querySelector('.spinner-overlay').style.display = 'none';
+                
+                const resultArea = document.getElementById('mediaResults');
+                resultArea.innerHTML = '';
+                
+                // Check if we have result data
+                if (data.manipulation_probability !== undefined) {
+                    
+                    // Create and display results
+                    const resultCard = document.createElement('div');
+                    resultCard.className = 'result-card mt-4';
+                    
+                    // Get the analysis data
+                    const probability = data.manipulation_probability;
+                    const classification = data.classification || 
+                        (probability > 0.5 ? 'AI-generated' : 'Authentic');
+                    
+                    // Classification header with badge
+                    let classColor = probability > 0.6 ? 'danger' : 
+                                    probability > 0.4 ? 'warning' : 'success';
+                    
+                    resultCard.innerHTML = `
+                        <div class="card-header bg-${classColor} text-white">
+                            <h3 class="mb-0">${classification}</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 text-center">
+                                    <div class="score-circle ${classColor}">
+                                        <div class="score-value">${Math.round(probability * 100)}%</div>
+                                        <div class="score-label">AI Probability</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <h4>Analysis Results</h4>
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar bg-${classColor}" 
+                                            role="progressbar" 
+                                            style="width: ${probability * 100}%" 
+                                            aria-valuenow="${probability * 100}" 
+                                            aria-valuemin="0" 
+                                            aria-valuemax="100">
+                                            ${Math.round(probability * 100)}%
+                                        </div>
+                                    </div>
+                                    <p>
+                                        ${probability > 0.6 ? 
+                                            'This image shows strong indicators of AI generation.' : 
+                                        probability > 0.4 ? 
+                                            'This image shows moderate indicators of AI generation.' : 
+                                            'This image appears largely authentic.'}
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            ${data.analysis_notes && data.analysis_notes.length ? 
+                                `<div class="mt-4">
+                                    <h5>Analysis Notes</h5>
+                                    <ul>
+                                        ${data.analysis_notes.map(note => `<li>${note}</li>`).join('')}
+                                    </ul>
+                                </div>` : ''}
+                            
+                            <div class="mt-4">
+                                <h5>Detailed Scores</h5>
+                                <div class="row">
+                                    ${data.detailed_scores ? 
+                                        `<div class="col-md-6">
+                                            <ul class="list-group">
+                                                <li class="list-group-item d-flex justify-content-between">
+                                                    <span>Noise Analysis:</span>
+                                                    <span>${Math.round(data.detailed_scores.noise_score * 100)}%</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between">
+                                                    <span>Symmetry Analysis:</span>
+                                                    <span>${Math.round(data.detailed_scores.symmetry_score * 100)}%</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between">
+                                                    <span>Color Distribution:</span>
+                                                    <span>${Math.round(data.detailed_scores.color_score * 100)}%</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between">
+                                                    <span>Edge Analysis:</span>
+                                                    <span>${Math.round(data.detailed_scores.edge_score * 100)}%</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul class="list-group">
+                                                <li class="list-group-item d-flex justify-content-between">
+                                                    <span>Histogram Analysis:</span>
+                                                    <span>${Math.round(data.detailed_scores.hist_score * 100)}%</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between">
+                                                    <span>Aspect Ratio:</span>
+                                                    <span>${Math.round(data.detailed_scores.aspect_ratio_score * 100)}%</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between">
+                                                    <span>Pattern Detection:</span>
+                                                    <span>${Math.round(data.detailed_scores.pattern_score * 100)}%</span>
+                                                </li>
+                                                <li class="list-group-item d-flex justify-content-between">
+                                                    <span>Quantization Analysis:</span>
+                                                    <span>${Math.round(data.detailed_scores.quantization_score * 100)}%</span>
+                                                </li>
+                                            </ul>
+                                        </div>` : 
+                                        `<div class="col"><p>No detailed scores available</p></div>`
+                                    }
+                                </div>
+                            </div>
+                            
+                            ${data.visualizations ? 
+                                `<div class="mt-4">
+                                    <h5>Visualizations</h5>
+                                    <div class="d-flex flex-wrap">
+                                        ${Object.entries(data.visualizations).map(([key, url]) => 
+                                            `<div class="m-2">
+                                                <img src="${url}" alt="${key}" class="img-thumbnail" style="max-width: 200px">
+                                                <p class="small text-center">${key.replace('_', ' ')}</p>
+                                            </div>`
+                                        ).join('')}
+                                    </div>
+                                </div>` : ''}
+                        </div>
+                    `;
+                    
+                    resultArea.appendChild(resultCard);
+                } else if (data.error) {
+                    // Display error message
+                    const errorCard = document.createElement('div');
+                    errorCard.className = 'alert alert-danger mt-4';
+                    errorCard.innerHTML = `<strong>Error:</strong> ${data.error}`;
+                    resultArea.appendChild(errorCard);
+                    
+                    console.error('Analysis error:', data.error);
+                    if (data.traceback) {
+                        console.error('Traceback:', data.traceback);
+                    }
+                } else {
+                    // Unknown format
+                    const errorCard = document.createElement('div');
+                    errorCard.className = 'alert alert-warning mt-4';
+                    errorCard.textContent = 'Received unexpected response format from server.';
+                    resultArea.appendChild(errorCard);
+                    
+                    console.error('Unexpected response format:', data);
+                }
+            })
+            .catch(error => {
+                document.querySelector('.spinner-overlay').style.display = 'none';
+                
+                const resultArea = document.getElementById('mediaResults');
+                resultArea.innerHTML = '';
+                
+                const errorCard = document.createElement('div');
+                errorCard.className = 'alert alert-danger mt-4';
+                errorCard.textContent = error.message || 'An error occurred during analysis. Please try again.';
+                resultArea.appendChild(errorCard);
+                
+                console.error('Analysis error:', error);
+            });
+        });
+        
+        // File selection preview handler
+        document.getElementById('mediaFile').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                // Show file preview
+                document.querySelector('.upload-content').style.display = 'none';
+                document.querySelector('.file-preview').style.display = 'block';
+                
+                // Display file details
+                document.getElementById('fileName').textContent = file.name;
+                document.getElementById('fileSize').textContent = formatFileSize(file.size);
+                
+                // Enable analyze button
+                document.getElementById('analyzeMediaBtn').disabled = false;
+                
+                // Show image preview if it's an image
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById('filePreviewImg').src = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+        
+        // Remove file handler
+        document.getElementById('removeFile').addEventListener('click', function() {
+            // Reset file input
+            document.getElementById('mediaForm').reset();
+            
+            // Hide preview, show upload content
+            document.querySelector('.upload-content').style.display = 'block';
+            document.querySelector('.file-preview').style.display = 'none';
+            
+            // Disable analyze button
+            document.getElementById('analyzeMediaBtn').disabled = true;
+        });
+        
+        // Format file size helper
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // Drag and drop handlers
+        const uploadArea = document.getElementById('uploadArea');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            uploadArea.classList.add('dragover');
+        }
+        
+        function unhighlight() {
+            uploadArea.classList.remove('dragover');
+        }
+        
+        uploadArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            
+            if (files.length > 0) {
+                document.getElementById('mediaFile').files = files;
+                
+                // Trigger change event manually
+                const event = new Event('change');
+                document.getElementById('mediaFile').dispatchEvent(event);
+            }
+        }
+    </script>
+</body>
+</html> 

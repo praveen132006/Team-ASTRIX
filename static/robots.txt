@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /static/
+Disallow: /debug/
+Disallow: /api/
+Disallow: /analyze/
+
+Sitemap: https://forensic-ai.example.com/sitemap.xml 

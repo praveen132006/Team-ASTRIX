@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  forensicai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: forensicai:latest
+    container_name: forensicai
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./debug_output:/app/debug_output
+      - ./models:/app/models
+    environment:
+      - DEBUG=False
+      - PORT=5000
+      - TZ=UTC
+      - DEEPAI_API_KEY=${DEEPAI_API_KEY:-your_api_key_here}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - forensicai-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  forensicai-network:
+    driver: bridge 

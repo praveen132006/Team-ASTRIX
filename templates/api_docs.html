@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation - AI Forensic Analysis System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-okaidia.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="hero-section">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <div class="logo-wrapper">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <span>ForensicAI</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/api/documentation">API Docs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="https://github.com/yourusername/forensic-ai">
+                                <i class="fab fa-github me-2"></i>GitHub
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container hero-content">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="hero-title">ForensicAI <span class="highlight">API</span> Documentation</h1>
+                    <p class="hero-subtitle">
+                        Integrate our powerful AI detection capabilities into your applications
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#ffffff" fill-opacity="1" d="M0,288L48,272C96,256,192,224,288,208C384,192,480,192,576,208C672,224,768,256,864,261.3C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="api-sidebar">
+                        <div class="api-nav">
+                            <h5>API Reference</h5>
+                            <ul class="api-nav-list">
+                                <li><a href="#introduction" class="active">Introduction</a></li>
+                                <li><a href="#authentication">Authentication</a></li>
+                                <li><a href="#endpoints">Endpoints</a>
+                                    <ul>
+                                        <li><a href="#image-analysis">Image Analysis</a></li>
+                                        <li><a href="#text-analysis">Text Analysis</a></li>
+                                        <li><a href="#video-analysis">Video Analysis</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#error-handling">Error Handling</a></li>
+                                <li><a href="#rate-limits">Rate Limits</a></li>
+                                <li><a href="#sdk">Client SDKs</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="card api-card">
+                        <div class="card-body">
+                            <section id="introduction">
+                                <h2>Introduction</h2>
+                                <p class="lead">
+                                    The ForensicAI API enables you to integrate our advanced AI-generated content detection capabilities into your applications, services, or workflows.
+                                </p>
+                                <p>
+                                    Our RESTful API provides endpoints for analyzing images, videos, and text to determine if they were generated by AI tools like DALL-E, Midjourney, Stable Diffusion, or ChatGPT. The API returns detailed forensic analysis results, manipulation probability scores, and specific markers that indicate AI generation.
+                                </p>
+                                <div class="api-base-url">
+                                    <h5>Base URL</h5>
+                                    <div class="url-display">
+                                        <code>https://api.forensic-ai.com/v1</code>
+                                    </div>
+                                </div>
+                            </section>
+                            
+                            <section id="authentication" class="mt-5">
+                                <h2>Authentication</h2>
+                                <p>
+                                    All API requests must include your API key in the request headers. You can obtain an API key by registering for an account on our website.
+                                </p>
+                                <div class="code-block">
+                                    <pre><code class="language-bash">curl -X POST https://api.forensic-ai.com/v1/analyze/image \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-H "Content-Type: multipart/form-data" \
+-F "file=@/path/to/image.jpg"</code></pre>
+                                </div>
+                            </section>
+                            
+                            <section id="endpoints" class="mt-5">
+                                <h2>Endpoints</h2>
+                                
+                                <section id="image-analysis" class="mt-4">
+                                    <h3>Image Analysis</h3>
+                                    <p>
+                                        Analyze an image to detect if it was generated or manipulated by AI.
+                                    </p>
+                                    
+                                    <div class="endpoint-details">
+                                        <div class="endpoint-header">
+                                            <span class="method post">POST</span>
+                                            <span class="path">/analyze/image</span>
+                                        </div>
+                                        
+                                        <div class="mt-3">
+                                            <h5>Request</h5>
+                                            <p>The request should be a multipart/form-data POST with the image file.</p>
+                                            <div class="code-block">
+                                                <pre><code class="language-bash">curl -X POST https://api.forensic-ai.com/v1/analyze/image \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-H "Content-Type: multipart/form-data" \
+-F "file=@/path/to/image.jpg"</code></pre>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-3">
+                                            <h5>Response</h5>
+                                            <p>The response is a JSON object containing the analysis results.</p>
+                                            <div class="code-block">
+                                                <pre><code class="language-json">{
+  "deepfake_analysis": {
+    "manipulation_probability": 0.87,
+    "confidence_score": 0.92,
+    "classification": "AI-generated",
+    "risk_level": "High",
+    "analysis_details": {
+      "faces_detected": 1,
+      "face_analysis_scores": [0.75],
+      "frequency_anomalies": ["Unusual frequency patterns detected"],
+      "noise_inconsistency": 0.81,
+      "ela_score": 0.78,
+      "ai_generated_probability": 0.85,
+      "compression_artifacts": 0.32,
+      "ai_artifacts": ["Repeating texture patterns", "Unnatural color transitions"]
+    },
+    "forensic_markers": [
+      "High confidence facial manipulation detected",
+      "Unusual frequency patterns detected",
+      "Inconsistent noise patterns detected",
+      "Error Level Analysis indicates potential manipulation",
+      "CNN classifier detected AI generation patterns with high confidence"
+    ],
+    "recommendations": "HIGH RISK: This image shows strong indicators of AI generation or manipulation. Do not trust without thorough verification."
+  },
+  "metadata_analysis": {
+    "file_info": {
+      "file_size": 1254678,
+      "created_time": "2023-09-15T10:23:45",
+      "modified_time": "2023-09-15T10:23:45"
+    },
+    "metadata": {
+      "dimensions": {
+        "width": 1024,
+        "height": 1024
+      }
+    },
+    "mime_type": "image/jpeg",
+    "analysis_complete": true
+  }
+}</code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                
+                                <section id="text-analysis" class="mt-4">
+                                    <h3>Text Analysis</h3>
+                                    <p>
+                                        Analyze text to detect if it was generated by an AI language model.
+                                    </p>
+                                    
+                                    <div class="endpoint-details">
+                                        <div class="endpoint-header">
+                                            <span class="method post">POST</span>
+                                            <span class="path">/analyze/text</span>
+                                        </div>
+                                        
+                                        <div class="mt-3">
+                                            <h5>Request</h5>
+                                            <p>The request should be a JSON POST with the text to analyze.</p>
+                                            <div class="code-block">
+                                                <pre><code class="language-bash">curl -X POST https://api.forensic-ai.com/v1/analyze/text \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+  "text": "The text content you want to analyze for AI generation..."
+}'</code></pre>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-3">
+                                            <h5>Response</h5>
+                                            <p>The response is a JSON object containing the analysis results.</p>
+                                            <div class="code-block">
+                                                <pre><code class="language-json">{
+  "ai_generated_probability": 0.78,
+  "analysis_details": {
+    "pattern_matches": {
+      "moreover": 2,
+      "in conclusion": 1,
+      "with respect to": 3
+    },
+    "complexity_score": 0.65,
+    "repetition_score": 0.42,
+    "filler_word_score": 0.55
+  },
+  "analysis_method": "linguistic_analysis",
+  "analysis_complete": true
+}</code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                
+                                <section id="video-analysis" class="mt-4">
+                                    <h3>Video Analysis</h3>
+                                    <p>
+                                        Analyze a video to detect if it contains AI-generated or manipulated content.
+                                    </p>
+                                    
+                                    <div class="endpoint-details">
+                                        <div class="endpoint-header">
+                                            <span class="method post">POST</span>
+                                            <span class="path">/analyze/video</span>
+                                        </div>
+                                        
+                                        <div class="mt-3">
+                                            <h5>Request</h5>
+                                            <p>The request should be a multipart/form-data POST with the video file.</p>
+                                            <div class="code-block">
+                                                <pre><code class="language-bash">curl -X POST https://api.forensic-ai.com/v1/analyze/video \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-H "Content-Type: multipart/form-data" \
+-F "file=@/path/to/video.mp4"</code></pre>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-3">
+                                            <h5>Response</h5>
+                                            <p>The response is a JSON object containing the analysis results.</p>
+                                            <div class="code-block">
+                                                <pre><code class="language-json">{
+  "deepfake_analysis": {
+    "manipulation_probability": 0.82,
+    "frames_analyzed": 120,
+    "processed_frames": 12,
+    "analysis_complete": true,
+    "analysis_method": "video_analysis"
+  },
+  "metadata_analysis": {
+    "file_info": {
+      "file_size": 6254678,
+      "created_time": "2023-09-15T10:23:45",
+      "modified_time": "2023-09-15T10:23:45"
+    },
+    "metadata": {
+      "frame_count": 120,
+      "fps": 30,
+      "width": 1920,
+      "height": 1080,
+      "duration": 4.0
+    },
+    "mime_type": "video/mp4",
+    "analysis_complete": true
+  }
+}</code></pre>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </section>
+                            
+                            <section id="error-handling" class="mt-5">
+                                <h2>Error Handling</h2>
+                                <p>
+                                    The API uses conventional HTTP response codes to indicate the success or failure of requests.
+                                </p>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Code</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>200 - OK</td>
+                                                <td>Request succeeded. Response contains analysis results.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>400 - Bad Request</td>
+                                                <td>Invalid request, such as missing required parameters.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>401 - Unauthorized</td>
+                                                <td>Missing or invalid API key.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>403 - Forbidden</td>
+                                                <td>API key valid but doesn't have permission for the request.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>429 - Too Many Requests</td>
+                                                <td>Rate limit exceeded.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>500 - Server Error</td>
+                                                <td>Internal server error occurred during processing.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="mt-3">
+                                    <h5>Error Response Format</h5>
+                                    <div class="code-block">
+                                        <pre><code class="language-json">{
+  "error": {
+    "code": "invalid_file_type",
+    "message": "Unsupported file type. Please upload an image in JPEG, PNG, or WEBP format.",
+    "status": 400
+  }
+}</code></pre>
+                                    </div>
+                                </div>
+                            </section>
+                            
+                            <section id="rate-limits" class="mt-5">
+                                <h2>Rate Limits</h2>
+                                <p>
+                                    API requests are subject to rate limiting to ensure fair usage. Rate limits vary by subscription tier.
+                                </p>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Plan</th>
+                                                <th>Rate Limit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Free</td>
+                                                <td>10 requests per minute</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Basic</td>
+                                                <td>50 requests per minute</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pro</td>
+                                                <td>200 requests per minute</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Enterprise</td>
+                                                <td>Custom limits</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                            
+                            <section id="sdk" class="mt-5">
+                                <h2>Client SDKs</h2>
+                                <p>
+                                    We provide official client libraries for popular programming languages to make integrating with our API easier.
+                                </p>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <div class="sdk-card">
+                                            <div class="sdk-icon">
+                                                <i class="fab fa-python"></i>
+                                            </div>
+                                            <h5>Python</h5>
+                                            <div class="sdk-install">
+                                                <code>pip install forensicai</code>
+                                            </div>
+                                            <a href="#" class="btn btn-sm btn-outline-primary mt-2">Documentation</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="sdk-card">
+                                            <div class="sdk-icon">
+                                                <i class="fab fa-js"></i>
+                                            </div>
+                                            <h5>JavaScript</h5>
+                                            <div class="sdk-install">
+                                                <code>npm install forensicai</code>
+                                            </div>
+                                            <a href="#" class="btn btn-sm btn-outline-primary mt-2">Documentation</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="sdk-card">
+                                            <div class="sdk-icon">
+                                                <i class="fab fa-java"></i>
+                                            </div>
+                                            <h5>Java</h5>
+                                            <div class="sdk-install">
+                                                <code>maven: com.forensicai:client</code>
+                                            </div>
+                                            <a href="#" class="btn btn-sm btn-outline-primary mt-2">Documentation</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-brand">
+                        <i class="fas fa-shield-halved"></i>
+                        <span>ForensicAI</span>
+                    </div>
+                    <p>Advanced AI-generated content detection with forensic-level precision.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>Product</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>Resources</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Research</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5>Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2">
+                    <div class="language-selector">
+                        <i class="fas fa-globe"></i>
+                        <select>
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">Français</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ForensicAI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/components/prism-bash.min.js"></script>
+    
+    <style>
+        .api-card {
+            border: none;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--space-3xl);
+        }
+        
+        .api-sidebar {
+            position: sticky;
+            top: 20px;
+        }
+        
+        .api-nav {
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .api-nav h5 {
+            color: var(--gray-900);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .api-nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .api-nav-list li {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .api-nav-list li a {
+            display: block;
+            padding: var(--space-xs) var(--space-sm);
+            color: var(--gray-700);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+        }
+        
+        .api-nav-list li a:hover,
+        .api-nav-list li a.active {
+            background-color: var(--gray-100);
+            color: var(--primary);
+        }
+        
+        .api-nav-list ul {
+            list-style: none;
+            padding-left: var(--space-lg);
+            margin-top: var(--space-xs);
+        }
+        
+        .api-base-url {
+            background-color: var(--gray-50);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .url-display {
+            background-color: var(--gray-800);
+            color: var(--white);
+            padding: var(--space-md);
+            border-radius: var(--radius-sm);
+            font-family: monospace;
+            margin-top: var(--space-sm);
+        }
+        
+        .endpoint-details {
+            background-color: var(--gray-50);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin-top: var(--space-md);
+        }
+        
+        .endpoint-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+        
+        .method {
+            display: inline-block;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-right: var(--space-sm);
+            color: var(--white);
+        }
+        
+        .method.get {
+            background-color: var(--info);
+        }
+        
+        .method.post {
+            background-color: var(--success);
+        }
+        
+        .method.put {
+            background-color: var(--warning);
+        }
+        
+        .method.delete {
+            background-color: var(--danger);
+        }
+        
+        .path {
+            font-family: monospace;
+            font-size: 1rem;
+            color: var(--gray-800);
+        }
+        
+        .code-block {
+            position: relative;
+            margin-top: var(--space-sm);
+        }
+        
+        .code-block pre {
+            background-color: var(--gray-800);
+            border-radius: var(--radius-md);
+            margin: 0;
+        }
+        
+        .sdk-card {
+            background-color: var(--white);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            height: 100%;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .sdk-icon {
+            font-size: 2rem;
+            margin-bottom: var(--space-md);
+            color: var(--primary);
+        }
+        
+        .sdk-install {
+            background-color: var(--gray-100);
+            padding: var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-family: monospace;
+            font-size: 0.875rem;
+            margin: var(--space-md) 0;
+        }
+    </style>
+</body>
+</html> 
